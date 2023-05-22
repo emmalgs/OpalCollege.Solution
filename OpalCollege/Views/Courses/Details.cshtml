@@ -24,9 +24,10 @@ else
   <ul>
   @foreach (StudentCourse join in Model.JoinEntities)
   {
-    <li>@join.Student.Name</li>
+    <li>@Html.ActionLink($"{join.Student.Name}", "Details", "Students", new { id = join.Student.StudentId})</li>
   }
   </ul>
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Add Student", "AddStudent", new { id = Model.CourseId })</p>

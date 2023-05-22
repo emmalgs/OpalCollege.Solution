@@ -2,11 +2,19 @@
   Layout = "_Layout";
 }
 
+@using OpalCollege.Models
 @model OpalCollege.Models.Student
+
 
 <p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
 @if (Model.JoinEntities.Count == 0)
 {
   <p>No courses added yet</p>
-  <p>@Html.ActionLink("Enroll Student", "AddCourse")</p>
+  <p>@Html.ActionLink("Enroll Student", "AddCourse", new { id = Model.StudentId})</p>
+}
+
+@foreach (StudentCourse join in Model.JoinEntities)
+{
+  <li>@Html.ActionLink($"{join.Course.Title}", "Details", "Courses", new { id = join.Course.CourseId})</li>
+  
 }
