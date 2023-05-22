@@ -9,7 +9,12 @@ You want details? I'LL GIVE YOU DETAILS
 
 @* <h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model = model.Title)</h3> *@
 
-@if(Model.JoinEntities.Count == 0)
+<p>Course Title: @Model.Title</p>
+<p>Subject: @Model.Subject</p>
+<p>Level: @Model.Level</p>
+<p>Professor: @Model.Professor</p>
+
+@if (Model.JoinEntities.Count == 0)
 {
   <p>This course does not have any students because of what Sarah said.</p>
 }
@@ -17,7 +22,7 @@ else
 {
   <h4>Students attending this class:</h4>
   <ul>
-  @foreach(StudentCourse join in Model.JoinEntities)
+  @foreach (StudentCourse join in Model.JoinEntities)
   {
     <li>@join.Student.Name</li>
   }
