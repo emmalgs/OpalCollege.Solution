@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+}
+
+@model OpalCollege.Models.Student
+
+<p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
+@if (Model.JoinEntities.Count == 0)
+{
+  <p>No courses added yet</p>
+  <p>@Html.ActionLink("Enroll Student", "AddCourse")</p>
+}
