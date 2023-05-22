@@ -65,5 +65,20 @@ namespace OpalCollege.Controllers
                                 .FirstOrDefault(student => student.StudentId == id);
       return View(foundStudent);
     }
+
+    public ActionResult Edit(int id)
+    {
+      Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+      ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Title");
+      return View(thisStudent);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Student student)
+    {
+      _db.Students.Update(student);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = student.StudentId});
+    }
   }
 }
