@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+@using OpalCollege.Models
+
+<h2>Courses</h2>
+
+@if (Model.Count == 0)
+{
+  <p>We should probably have some courses</p>
+}
+
+@foreach (Course course in Model)
+{
+  <p>@course.Title</p>
+  <p>@Html.ActionLink("Course Details", "Details", new { id = course.CourseId })</p>
+}
+
+@Html.ActionLink("Add Course", "Create")
