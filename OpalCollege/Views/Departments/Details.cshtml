@@ -18,6 +18,7 @@
   <p>@Html.ActionLink($"{course.Title}", "Details", "Courses", new { id = course.CourseId })</p>
 }
   <ul><label>Students in this Department:</label>
+
 @foreach (Student student in allStudents)
 {
 
