@@ -62,7 +62,9 @@ namespace OpalCollege.Controllers
     {
       Course thisCourse = _db.Courses
                             .Include(course => course.JoinEntities)
+                            .Include(join => join.JoinCourses)
                             .ThenInclude(join => join.Student)
+                            .ThenInclude(join => join.Department)
                             .FirstOrDefault(course => course.CourseId == id);
       return View(thisCourse);
     }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpalCollege.Models;
 
@@ -10,9 +11,10 @@ using OpalCollege.Models;
 namespace OpalCollege.Migrations
 {
     [DbContext(typeof(OpalCollegeContext))]
-    partial class OpalCollegeContextModelSnapshot : ModelSnapshot
+    [Migration("20230523183638_DepartmentIdEntityToStudentsTable")]
+    partial class DepartmentIdEntityToStudentsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,13 +27,13 @@ namespace OpalCollege.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
                     b.Property<string>("Professor")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Subject")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Title")
@@ -125,13 +127,13 @@ namespace OpalCollege.Migrations
             modelBuilder.Entity("OpalCollege.Models.DepartmentCourse", b =>
                 {
                     b.HasOne("OpalCollege.Models.Course", "Course")
-                        .WithMany("JoinCourses")
+                        .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("OpalCollege.Models.Department", "Department")
-                        .WithMany("JoinCourses")
+                        .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -144,7 +146,7 @@ namespace OpalCollege.Migrations
             modelBuilder.Entity("OpalCollege.Models.Student", b =>
                 {
                     b.HasOne("OpalCollege.Models.Department", "Department")
-                        .WithMany("Students")
+                        .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -173,16 +175,7 @@ namespace OpalCollege.Migrations
 
             modelBuilder.Entity("OpalCollege.Models.Course", b =>
                 {
-                    b.Navigation("JoinCourses");
-
                     b.Navigation("JoinEntities");
-                });
-
-            modelBuilder.Entity("OpalCollege.Models.Department", b =>
-                {
-                    b.Navigation("JoinCourses");
-
-                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("OpalCollege.Models.Student", b =>

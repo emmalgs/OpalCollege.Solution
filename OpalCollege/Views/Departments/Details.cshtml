@@ -3,18 +3,13 @@
 }
 
 @using OpalCollege.Models
-@* @model OpalCollege.Models.Course *@
+@model OpalCollege.Models.Department
 
 Department Details:
 
-@* <h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model = model.Title)</h3> *@
+<h3>@Html.DisplayNameFor(model => model.Subject): @Html.DisplayFor(model => model.Subject)</h3>
 
-<p>Department Subject: @Model.Subject</p>
-
-@* <p>Level: @Model.Level</p>
-<p>Professor: @Model.Professor</p> *@
-
-@if (Model.JoinEntities.Count == 0)
+@if (Model.JoinCourses.Count == 0)
 {
   <p>This Department has no Courses.</p>
 }
@@ -22,7 +17,7 @@ else
 {
   <h4>Courses in this Department:</h4>
   <ul>
-  @foreach (DepartmentCourse join in Model.JoinEntities)
+  @foreach (DepartmentCourse join in Model.JoinCourses)
   {
     <li>@Html.ActionLink($"{join.Course.Title}", "Details", "Courses", new { id = join.Course.CourseId})
       @using (Html.BeginForm("DeleteJoin", "Courses"))
@@ -34,25 +29,3 @@ else
   }
   </ul>
 }
-
-
-@* else
-{
-  <h4>Students attending this class:</h4>
-  <ul>
-  @foreach (StudentCourse join in Model.JoinEntities)
-  {
-    <li>@Html.ActionLink($"{join.Student.Name}", "Details", "Students", new { id = join.Student.StudentId})
-      @using (Html.BeginForm("DeleteJoin", "Courses"))
-      {
-        @Html.Hidden("joinId", @join.StudentCourseId)
-        <input type="submit" value="Remove Student From Class"/>
-      }
-    </li>
-  }
-  </ul>
-} *@
-
-<p>@Html.ActionLink("Delete Course", "Delete", new { id = Model.CourseId })</p>
-<p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Add Student", "AddStudent", new { id = Model.CourseId })</p>

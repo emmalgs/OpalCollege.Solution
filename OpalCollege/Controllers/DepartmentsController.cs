@@ -15,5 +15,32 @@ namespace OpalCollege.Controllers
     {
       _db = db;
     }
+
+    public ActionResult Index()
+    {
+      return View(_db.Departments.ToList());
+    }
+
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Department department)
+    {
+      _db.Departments.Add(department);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult Details(int id)
+    {
+      Department thisDept = _db.Departments
+                                .Include(department => department.JoinCourses)
+                                .ThenInclude(join => join.Course)
+                                .FirstOrDefault(dept => dept.DepartmentId == id);
+      return View(thisDept);
+    }
   }
 }

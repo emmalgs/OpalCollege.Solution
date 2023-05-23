@@ -15,7 +15,9 @@ namespace OpalCollege.Models
         [DataType(DataType.DateTime, ErrorMessage = "PLEASE ENTER A DATE, PLEASE!!!!")]
         [Range(typeof(DateTime), "2022-01-01", "2024-12-31", ErrorMessage = "ARe you insande thats snot ebven real")]
         public DateTime? EnrollDate { get; set; }
-        
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; }
         public List<StudentCourse> JoinEntities { get; }
+        
     }
 }

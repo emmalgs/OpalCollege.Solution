@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpalCollege.Models;
 
@@ -10,9 +11,10 @@ using OpalCollege.Models;
 namespace OpalCollege.Migrations
 {
     [DbContext(typeof(OpalCollegeContext))]
-    partial class OpalCollegeContextModelSnapshot : ModelSnapshot
+    [Migration("20230523182554_DepartmentsTable")]
+    partial class DepartmentsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,13 +27,13 @@ namespace OpalCollege.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
                     b.Property<string>("Professor")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Subject")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Title")
@@ -56,34 +58,10 @@ namespace OpalCollege.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("OpalCollege.Models.DepartmentCourse", b =>
-                {
-                    b.Property<int>("DepartmentCourseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DepartmentCourseId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.ToTable("DepartmentCourses");
-                });
-
             modelBuilder.Entity("OpalCollege.Models.Student", b =>
                 {
                     b.Property<int>("StudentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("EnrollDate")
@@ -95,8 +73,6 @@ namespace OpalCollege.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("StudentId");
-
-                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Students");
                 });
@@ -122,36 +98,6 @@ namespace OpalCollege.Migrations
                     b.ToTable("StudentCourses");
                 });
 
-            modelBuilder.Entity("OpalCollege.Models.DepartmentCourse", b =>
-                {
-                    b.HasOne("OpalCollege.Models.Course", "Course")
-                        .WithMany("JoinCourses")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OpalCollege.Models.Department", "Department")
-                        .WithMany("JoinCourses")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("OpalCollege.Models.Student", b =>
-                {
-                    b.HasOne("OpalCollege.Models.Department", "Department")
-                        .WithMany("Students")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-                });
-
             modelBuilder.Entity("OpalCollege.Models.StudentCourse", b =>
                 {
                     b.HasOne("OpalCollege.Models.Course", "Course")
@@ -173,16 +119,7 @@ namespace OpalCollege.Migrations
 
             modelBuilder.Entity("OpalCollege.Models.Course", b =>
                 {
-                    b.Navigation("JoinCourses");
-
                     b.Navigation("JoinEntities");
-                });
-
-            modelBuilder.Entity("OpalCollege.Models.Department", b =>
-                {
-                    b.Navigation("JoinCourses");
-
-                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("OpalCollege.Models.Student", b =>
