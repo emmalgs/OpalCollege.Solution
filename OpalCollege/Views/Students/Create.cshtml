@@ -1,6 +1,7 @@
 @{
   Layout = "_Layout";
 }
+<hr />
 
 @model OpalCollege.Models.Student
 
@@ -9,14 +10,17 @@
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.Name)
+  <label>Student Name: </label>
   @Html.TextBoxFor(model => model.Name)
-
-  @Html.LabelFor(model => model.EnrollDate)
+<br>
+<br>
+  <label>Enrollment Date: </label>
   @Html.TextBoxFor(model => model.EnrollDate, new { type="date" })
-
-  @Html.LabelFor(model => model.Department)
+<br>
+<br>
+  <label>Prospective Major: </label>
   @Html.DropDownList("DepartmentId")
-
+<br>
+<br>
   <input type="submit" value="Add" />
 }
