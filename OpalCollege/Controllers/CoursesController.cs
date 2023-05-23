@@ -18,7 +18,9 @@ namespace OpalCollege.Controllers
 
     public ActionResult Index()
     {
-      List<Course> model = _db.Courses.ToList();
+      List<Course> model = _db.Courses
+                              .Include(courses => courses.Department)
+                              .ToList();
       return View(model);
     }
 

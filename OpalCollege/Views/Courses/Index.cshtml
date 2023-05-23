@@ -13,7 +13,7 @@
 @foreach (Course course in Model)
 {
   <p>@course.Title</p>
-  <p>@Html.ActionLink("Course Details", "Details", new { id = course.CourseId })</p>
+  <p>@Html.ActionLink("Course Details", "Details", new { id = course.CourseId }) / <Label>Department:</Label> @Html.ActionLink($"{course.Department.Subject}", "Details", "Departments", new { id = course.DepartmentId})</p>
 }
 
 @Html.ActionLink("Add Course", "Create")
