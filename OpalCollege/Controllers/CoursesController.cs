@@ -90,6 +90,16 @@ namespace OpalCollege.Controllers
     public ActionResult DeleteConfirmed(int id)
     {
       Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      _db.Courses.Remove(thisCourse);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult DeleteJoin(int joinId)
+    {
+      StudentCourse joinEntry = _db.StudentCourses.FirstOrDefault(entry => entry.StudentCourseId == joinId);
+      _db.StudentCourses.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
