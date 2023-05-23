@@ -8,10 +8,11 @@
 <h2>Studentdetaele</h2>
 
 <p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
+<p><label>Major:</label> @Model.Department.Subject</p>
 @if (Model.JoinEntities.Count == 0)
 {
   <p>No courses added yet</p>
-  <p>@Html.ActionLink("Enroll Student", "AddCourse", new { id = Model.StudentId})</p>
+  <p>@Html.ActionLink("Add Courses", "AddCourse", new { id = Model.StudentId})</p>
 }
 
 @foreach (StudentCourse join in Model.JoinEntities)
@@ -27,8 +28,10 @@
   
 }
 
+<p>@Html.ActionLink("Add Courses", "AddCourse", new { id = Model.StudentId})</p>
 <p>@Html.ActionLink("Edit Student", "Edit", new { id = Model.StudentId })</p>
 <p>@Html.ActionLink("Delete Student", "Delete", new { id = Model.StudentId })</p>
+
 
 
 // WE LEFT OFF HERE //

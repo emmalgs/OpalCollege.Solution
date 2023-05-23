@@ -11,8 +11,8 @@ using OpalCollege.Models;
 namespace OpalCollege.Migrations
 {
     [DbContext(typeof(OpalCollegeContext))]
-    [Migration("20230522182209_RemoveCourseEntityInStudent")]
-    partial class RemoveCourseEntityInStudent
+    [Migration("20230523211236_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,13 +27,13 @@ namespace OpalCollege.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
                     b.Property<string>("Professor")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Subject")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Title")
@@ -41,7 +41,23 @@ namespace OpalCollege.Migrations
 
                     b.HasKey("CourseId");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("OpalCollege.Models.Department", b =>
+                {
+                    b.Property<int>("DepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("DepartmentId");
+
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("OpalCollege.Models.Student", b =>
@@ -50,13 +66,20 @@ namespace OpalCollege.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EnrollDate")
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EnrollDate")
+                        .IsRequired()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("StudentId");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Students");
                 });
@@ -82,6 +105,28 @@ namespace OpalCollege.Migrations
                     b.ToTable("StudentCourses");
                 });
 
+            modelBuilder.Entity("OpalCollege.Models.Course", b =>
+                {
+                    b.HasOne("OpalCollege.Models.Department", "Department")
+                        .WithMany("Courses")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("OpalCollege.Models.Student", b =>
+                {
+                    b.HasOne("OpalCollege.Models.Department", "Department")
+                        .WithMany("Students")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("OpalCollege.Models.StudentCourse", b =>
                 {
                     b.HasOne("OpalCollege.Models.Course", "Course")
@@ -104,6 +149,13 @@ namespace OpalCollege.Migrations
             modelBuilder.Entity("OpalCollege.Models.Course", b =>
                 {
                     b.Navigation("JoinEntities");
+                });
+
+            modelBuilder.Entity("OpalCollege.Models.Department", b =>
+                {
+                    b.Navigation("Courses");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("OpalCollege.Models.Student", b =>

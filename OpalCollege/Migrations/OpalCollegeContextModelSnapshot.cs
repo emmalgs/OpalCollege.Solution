@@ -39,6 +39,8 @@ namespace OpalCollege.Migrations
 
                     b.HasKey("CourseId");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Courses");
                 });
 
@@ -54,27 +56,6 @@ namespace OpalCollege.Migrations
                     b.HasKey("DepartmentId");
 
                     b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("OpalCollege.Models.DepartmentCourse", b =>
-                {
-                    b.Property<int>("DepartmentCourseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DepartmentCourseId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.ToTable("DepartmentCourses");
                 });
 
             modelBuilder.Entity("OpalCollege.Models.Student", b =>
@@ -122,21 +103,13 @@ namespace OpalCollege.Migrations
                     b.ToTable("StudentCourses");
                 });
 
-            modelBuilder.Entity("OpalCollege.Models.DepartmentCourse", b =>
+            modelBuilder.Entity("OpalCollege.Models.Course", b =>
                 {
-                    b.HasOne("OpalCollege.Models.Course", "Course")
-                        .WithMany("JoinCourses")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("OpalCollege.Models.Department", "Department")
-                        .WithMany("JoinCourses")
+                        .WithMany("Courses")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
 
                     b.Navigation("Department");
                 });
@@ -173,14 +146,12 @@ namespace OpalCollege.Migrations
 
             modelBuilder.Entity("OpalCollege.Models.Course", b =>
                 {
-                    b.Navigation("JoinCourses");
-
                     b.Navigation("JoinEntities");
                 });
 
             modelBuilder.Entity("OpalCollege.Models.Department", b =>
                 {
-                    b.Navigation("JoinCourses");
+                    b.Navigation("Courses");
 
                     b.Navigation("Students");
                 });

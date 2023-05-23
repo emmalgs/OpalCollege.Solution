@@ -36,10 +36,7 @@ namespace OpalCollege.Controllers
 
     public ActionResult Details(int id)
     {
-      Department thisDept = _db.Departments
-                                .Include(department => department.JoinCourses)
-                                .ThenInclude(join => join.Course)
-                                .FirstOrDefault(dept => dept.DepartmentId == id);
+      Department thisDept = _db.Departments.FirstOrDefault(dept => dept.DepartmentId == id);
       return View(thisDept);
     }
   }

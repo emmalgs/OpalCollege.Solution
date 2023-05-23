@@ -24,7 +24,7 @@ namespace OpalCollege.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Title");
+            ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Subject");
             return View();
         }
 
@@ -68,9 +68,10 @@ namespace OpalCollege.Controllers
         public ActionResult Details(int id)
         {
             Student foundStudent = _db.Students
-                                      .Include(student => student.JoinEntities)
-                                      .ThenInclude(join => join.Course)
-                                      .FirstOrDefault(student => student.StudentId == id);
+                                        .Include(student => student.JoinEntities)
+                                        .ThenInclude(join => join.Course)
+                                        .Include(student => student.Department)
+                                        .FirstOrDefault(student => student.StudentId == id);
             return View(foundStudent);
         }
 
@@ -78,7 +79,7 @@ namespace OpalCollege.Controllers
         public ActionResult Edit(int id)
         {
             Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
-            ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Title");
+            ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Subject");
             return View(thisStudent);
         }
 

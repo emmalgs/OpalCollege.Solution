@@ -12,6 +12,5 @@ namespace OpalCollege.Models
     public int Level { get; set; }
     public string Professor { get; set; }
     public List<StudentCourse> JoinEntities { get; }  
-    public List<DepartmentCourse> JoinCourses { get; }  
   }
 }

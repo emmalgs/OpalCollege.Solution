@@ -8,6 +8,6 @@ namespace OpalCollege.Models
     public int DepartmentId { get; set; }
     public string Subject { get; set; }
     public List<Student> Students { get; set; }
-    public List<DepartmentCourse> JoinCourses { get; }
+    public List<Course> Courses { get; set; }
   }
 }
