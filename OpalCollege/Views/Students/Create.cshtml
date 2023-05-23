@@ -4,6 +4,9 @@
 
 @model OpalCollege.Models.Student
 
+<p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger"})</p>
+<p>@Html.ValidationMessageFor(model => model.EnrollDate, "", new { @class = "text-danger"})</p>
+
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Name)
