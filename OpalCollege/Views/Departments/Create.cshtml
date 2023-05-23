@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+@model OpalCollege.Models.Course
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Subject)
+  @Html.TextBoxFor(model => model.Subject)
+
+  <input type="submit" value="Create Department">
+}

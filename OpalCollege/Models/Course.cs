@@ -10,6 +10,8 @@ namespace OpalCollege.Models
     public string Subject { get; set; }
     public int Level { get; set; }
     public string Professor { get; set; }
+    public Department Department { get; set; }
+    public int DepartmentId { get; set; }
     public List<StudentCourse> JoinEntities { get; }    
   }
 }

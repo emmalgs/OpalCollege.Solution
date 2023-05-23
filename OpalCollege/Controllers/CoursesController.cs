@@ -24,6 +24,7 @@ namespace OpalCollege.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Subject");
       return View();
     }
 
