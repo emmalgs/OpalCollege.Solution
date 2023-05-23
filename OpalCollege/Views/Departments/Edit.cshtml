@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@model OpalCollege.Models.Department
+<h2>Edit</h2>
+
+<h4>Edit this Department: @Html.DisplayFor(model => model.Subject)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.DepartmentId)
+
+  @Html.LabelFor(model => model.Subject)
+  @Html.EditorFor(model => model.Subject)
+
+  <input type="submit" value="Save" />
+}

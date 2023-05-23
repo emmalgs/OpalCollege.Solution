@@ -40,5 +40,17 @@ namespace OpalCollege.Controllers
       Department thisDept = _db.Departments.FirstOrDefault(dept => dept.DepartmentId == id);
       return View(thisDept);
     }
+    public ActionResult Edit (int id)
+    {
+      Department thisDept = _db.Departments.FirstOrDefault(dept => dept.DepartmentId == id);
+      return View(thisDept);
+    }
+    [HttpPost]
+    public ActionResult Edit (Department department)
+    {
+      _db.Departments.Update(department);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
