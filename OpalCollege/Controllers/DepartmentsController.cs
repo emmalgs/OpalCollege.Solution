@@ -52,5 +52,19 @@ namespace OpalCollege.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult Delete (int id)
+    {
+      Department thisDept = _db.Departments.FirstOrDefault(dept => dept.DepartmentId == id);
+      return View(thisDept);
+    }
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed (int id)
+    {
+      Department thisDept = _db.Departments.FirstOrDefault(dept => dept.DepartmentId == id);
+      _db.Remove(thisDept);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
