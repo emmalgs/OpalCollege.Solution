@@ -8,17 +8,21 @@
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.Title)
+<label>Course Title: </label>
   @Html.TextBoxFor(model => model.Title)
-
-  @Html.LabelFor(model => model.DepartmentId)
+<br>
+<br>
+<label>Department: </label>
   @Html.DropDownList("DepartmentId")
-
-  @Html.LabelFor(model => model.Level)
+<br>
+<br>
+<label>Course Level: </label>
   @Html.TextBoxFor(model => model.Level)
-
-  @Html.LabelFor(model => model.Professor)
+<br>
+<br>
+<label>Professor: </label>
   @Html.TextBoxFor(model => model.Professor)
-
+<br>
+<br>
   <input type="submit" value="Create Course">
 }
