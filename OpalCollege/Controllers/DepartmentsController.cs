@@ -36,6 +36,7 @@ namespace OpalCollege.Controllers
 
     public ActionResult Details(int id)
     {
+      ViewBag.thisDeptsCourses = _db.Courses.Where(course => course.DepartmentId == id).ToList();
       Department thisDept = _db.Departments.FirstOrDefault(dept => dept.DepartmentId == id);
       return View(thisDept);
     }
