@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Chokokutai&family=Oi&family=PT+Mono&family=Quicksand:wght@400;700&family=Righteous&family=Unbounded:wght@300;800&display=swap');
+
 body {
   background-color: beige;
 }
@@ -10,4 +12,13 @@ body {
 .main {
   margin: 20px;
   padding: 12px;
+}
+.header {
+  margin: auto;
+  width: 60vw;
+}
+
+.header h1 {
+  font-family: Chokokutai, Helvetica;
+  font-size: 5em;
 }
