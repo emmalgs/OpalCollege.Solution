@@ -24,6 +24,7 @@ namespace OpalCollege.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.departmentList = _db.Departments.ToList();
             ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Subject");
             return View();
         }
@@ -31,10 +32,10 @@ namespace OpalCollege.Controllers
         [HttpPost]
         public ActionResult Create(Student student)
         {
-
             if (!ModelState.IsValid)
             {
-                ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Title");
+                ViewBag.departmentList = _db.Departments.ToList();
+                ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Subject");
                 return View();
             }
             else

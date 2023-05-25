@@ -1,26 +1,39 @@
 @{
   Layout = "_Layout";
+  List<Department> deptList = ViewBag.departmentList;
 }
 <hr />
 <h2>Add Student</h2>
 @model OpalCollege.Models.Student
+@using OpalCollege.Models
 
 <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger"})</p>
 <p>@Html.ValidationMessageFor(model => model.EnrollDate, "", new { @class = "text-danger"})</p>
+<p>@Html.ValidationMessageFor(model => model.Department, "", new { @class = "tet-danger"})</p>
 
-@using (Html.BeginForm())
+
+@if (deptList.Count == 0)
 {
-  <label>Student Name: </label>
-  @Html.TextBoxFor(model => model.Name)
-<br>
-<br>
-  <label>Enrollment Date: </label>
-  @Html.TextBoxFor(model => model.EnrollDate, new { type="date" })
-<br>
-<br>
-  <label>Prospective Major: </label>
-  @Html.DropDownList("DepartmentId")
-<br>
-<br>
-  <input type="submit" value="Add" />
+  <p>There are no departments added yet</p>
+  <p>Please add a department before continuing with enrollment</p>
+  @Html.ActionLink("Add Department", "Create", "Departments")
+}
+else
+{
+  @using (Html.BeginForm())
+  {
+    <label>Student Name: </label>
+    @Html.TextBoxFor(model => model.Name)
+    <br>
+    <br>
+    <label>Enrollment Date: </label>
+    @Html.TextBoxFor(model => model.EnrollDate, new { type="date" })
+    <br>
+    <br>
+    <label>Prospective Major: </label>
+    @Html.DropDownList("DepartmentId")
+    <br>
+    <br>
+    <input type="submit" value="Add" />
+  }
 }
