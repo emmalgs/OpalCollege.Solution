@@ -2,7 +2,7 @@
 
 ### By Emma Gerigscott, Thomas McDowell, Sarah Reimann
 
-<!-- ![gif of webpage in action](./HairSalon/wwwroot/img/claire.gif) -->
+![gif of webpage in action](./OpalCollege/wwwroot/img/opalcollege.gif)
 
 ## Description
 
@@ -59,4 +59,4 @@ The registrar at Opal College needs to add students, courses, and departments. T
 
 ## License
 [MIT](https://opensource.org/licenses/MIT)  
-Copyright © 2023 Emma Gerigscott
+Copyright © 2023 Emma Gerigscott, Thomas McDowell, Sarah Reimann
